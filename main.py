@@ -4,9 +4,17 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 # Load the model and tokenizer
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-tokenizer = T5Tokenizer.from_pretrained('t5-small')
-model = T5ForConditionalGeneration.from_pretrained('t5-small')
-model.load_state_dict(torch.load('/Users/ay227/Desktop/SignKey/models/propmt_t5_model_state_dict.pth', map_location=torch.device('cpu')))
+
+# tokenizer = T5Tokenizer.from_pretrained('t5-small')
+# tokenizer.save_pretrained('/Users/ay227/Desktop/SignKey/models/t5_small_tokenizer')
+tokenizer = T5Tokenizer.from_pretrained('/Users/ay227/Desktop/SignKey/models/t5_small_tokenizer')
+
+# model = T5ForConditionalGeneration.from_pretrained('t5-small')
+# model.load_state_dict(torch.load('/Users/ay227/Desktop/SignKey/models/propmt_t5_model_state_dict.pth', map_location=torch.device('cpu')))
+# model.save_pretrained('/Users/ay227/Desktop/SignKey/models/prompt_t5_150k')
+model = T5ForConditionalGeneration.from_pretrained('/Users/ay227/Desktop/SignKey/models/prompt_t5_150k')
+
+
 model.to(device)
 model.eval()
 app = Flask(__name__)
